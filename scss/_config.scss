@@ -15,16 +15,48 @@ $background-opacity: 0.9;
             background-attachment: fixed;
             background-size: cover;
             &:after { //an overlay for background image
-                content: ""; //must have this fro psuedo elements
+                content: ""; //must have this for psuedo elements
                 position: absolute;
                 top: 0;
                 right: 0;
                 width: 100%;
                 height: 100%;
-                z-index: -1;
+                z-index: -1; // Between the words and background image
                 background: rgba($primary-color, $background-opacity);
             }
         }
 
+    }
+}
+
+// Set Text Color
+@function set-text-color($color) {
+    @if (lightness($color) > 40) {
+        @return #000;
+    } @else {
+        @return #fff;
+    }
+}
+
+
+// Media Query Mixins
+@mixin mediaSm {
+    @media screen and (max-width: 500px) {
+        @content;
+    }
+}
+@mixin mediaMd { //only max-width without min-width: on purpose: mediaSm inherit mediaMd
+    @media screen and (max-width: 768px) {
+        @content;
+    }
+}
+@mixin mediaLg {
+    @media screen and (min-width: 769px) and (max-width: 1170px) {
+        @content;
+    }
+}
+@mixin mediaXl {
+    @media screen and (min-width: 1171px) {
+        @content;
     }
 }
